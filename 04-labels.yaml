@@ -5,8 +5,8 @@ metadata:
   labels:
     project: expense
     envirnoment: dev
+    module: demo
 spec:
   containers:
     - name: nginx
       image: nginx
-      
