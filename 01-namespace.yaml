@@ -1,6 +1,6 @@
 # it is like a vpc, creates an isolated environment.
 apiVersion: v1
-Kind: Namespace
+kind: Namespace
 metadata:
   name: expense
   labels: 
