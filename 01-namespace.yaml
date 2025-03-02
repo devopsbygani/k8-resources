@@ -1,0 +1,9 @@
+# it is like a vpc, creates an isolated environment.
+apiVersion: v1
+Kind: Namespace
+metadata:
+  name: expense
+  labels: 
+    project: expense
+    envirnoment: dev
+ 
