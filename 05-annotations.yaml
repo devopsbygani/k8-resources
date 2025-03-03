@@ -3,9 +3,8 @@ kind: pod
 metadata:
   name: annotations
   annotations:
-    imageregistry: "https://hub.docker.com/"
+    imageregistry: "https://hub.docker.com/"  # lables and annotation are similar but annotation can store more complex values
 spec:
   containers:
     - name: nginx
       image: nginx
-  
