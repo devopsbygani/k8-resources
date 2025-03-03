@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  course: devops from nginx-config file
+  duration: 120hrs
+  tutor: siva
+
+# kubectl apply -f 09-configmaps.yaml
+# kubectl get configmaps
