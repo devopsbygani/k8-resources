@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: pod
+metadata:
+  name: envirnoment
+spec: 
+  containers:
+    - name: nginx
+      image: nginx
+      env:
+      - name: course
+        value: devops
+      - name: duration
+        value: 120hrs
+# kubectl apply -f 06-envoironment.yaml
+
+      
