@@ -13,3 +13,5 @@ spec:
         limits:         # hard limit
           memory: "120Mi"
           cpu: "400m"
+
+#kubectl apply -f 07-resource-limit.yaml
