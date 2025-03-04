@@ -13,3 +13,4 @@ spec:
     port: 80  # service port
     targetPort: 80  # conatinaer port
   
+  #kubectl delete pod --all
