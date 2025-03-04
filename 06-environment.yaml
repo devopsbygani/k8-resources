@@ -8,7 +8,7 @@ spec:
       image: nginx
       env:
       - name: course
-        value: devops
+        value: devsecops
       - name: duration
         value: 120hrs
 # kubectl apply -f 06-envoironment.yaml
