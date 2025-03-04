@@ -11,6 +11,6 @@ spec:
         value: devsecops
       - name: duration
         value: 120hrs
-# kubectl apply -f 06-envoironment.yaml
+# kubectl apply -f 06-environment.yaml
 
       
