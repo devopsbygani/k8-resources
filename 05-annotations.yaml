@@ -4,6 +4,7 @@ metadata:
   name: annotations
   annotations:
     imageregistry: "https://hub.docker.com/"  # lables and annotation are similar but annotation can store more complex values
+    my_website: "http://devgani.online"
 spec:
   containers:
     - name: nginx
