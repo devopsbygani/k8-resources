@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-np  #nodeport -np
+spec:
+  type: NodePort
+  selector:
+    project: expense
+    envirnoment: dev
+    module: demo
+  ports:
+  - name: nginx-svc-port
+    protocol: TCP
+    port: 80  # service port
+    targetPort: 80  # conatinaer port
+
+
