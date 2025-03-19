@@ -7,4 +7,6 @@ spec:
     - name: nginx
       image: nginx
 
+# kubectl apply -f 02-pods.yaml
+# kubectl describe pod nginx
 
