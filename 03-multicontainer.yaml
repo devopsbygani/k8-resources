@@ -9,3 +9,5 @@ spec:
     - name: almalinux
       image: almalinux:9
       command: ["sleep","100"]
+
+#kubectl apply -f 03-multicontainer.yaml
