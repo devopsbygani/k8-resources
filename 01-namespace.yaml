@@ -8,4 +8,4 @@ metadata:
     envirnoment: dev
  
 # kubectl apply -f 01-namespace.yaml'
-#kubectl descrive namespace expense
+#kubectl describe namespace expense
