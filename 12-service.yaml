@@ -13,4 +13,7 @@ spec:
     port: 80  # service port
     targetPort: 80  # conatinaer port
   
-  #kubectl delete pod --all
+  #kubectl delete pod --all  # to delete all pods 
+  #kubectl apply -f 12-service.yaml
+  #kubectl get services
+  # kubectl describe service nginx
