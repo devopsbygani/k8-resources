@@ -14,4 +14,6 @@ spec:
     port: 80  # service port
     targetPort: 80  # conatinaer port
 
+#kubectl apply -f 13-node-port.yaml
+#kubectl get services
 
