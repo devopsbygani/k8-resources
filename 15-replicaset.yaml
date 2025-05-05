@@ -10,16 +10,14 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      project: expense
       envirnoment: dev
-      module: demo
+      app: fronten
+      
   template:
     metadata:
       labels:
-        project: expense
         envirnoment: dev
-        module: demo
-        tier: nginx_replicas
+        app: fronten
     spec:
       containers:
       - name: nginx
