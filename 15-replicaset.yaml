@@ -26,18 +26,18 @@ spec:
         image: nginx
 ---
 
-kind: Service
-apiVersion: v1
-metadata:
-  name: nginx-service
-spec:
-  selector:
-    project: expense
-    envirnoment: dev
-    module: demo
-  ports: 
-  - name: nginx-svc-port
-    protocol: TCP
-    port: 80  # service port
-    targetPort: 80  # conatinaer port
+# kind: Service
+# apiVersion: v1
+# metadata:
+#   name: nginx-service
+# spec:
+#   selector:
+#     project: expense
+#     envirnoment: dev
+#     module: demo
+#   ports: 
+#   - name: nginx-svc-port
+#     protocol: TCP
+#     port: 80  # service port
+#     targetPort: 80  # conatinaer port
 
