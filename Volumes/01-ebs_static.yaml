@@ -13,11 +13,11 @@ spec:
   accessModes:
   - ReadWriteOnce
   capacity:
-    storage: 20Gi
+    storage: 5Gi
   csi:
     driver: ebs.csi.aws.com
     fsType: ext4
-    volumeHandle: vol-03c604538dd7d2f41
+    volumeHandle: vol-0dbd2948d9ec9fafd
 ---
 apiVersion: v1
 kind: persistentVolumeClaim
@@ -36,7 +36,7 @@ apiVersion: v1
 kind: pod
 metadata:
   name: ebs-static
-  namespace: expense
+  #namespace: expense
   labels:
     product: testing
 spec:
@@ -55,7 +55,7 @@ apiVersion: v1
 kind: service
 metadata:
   name: ebs-static
-  namespace: expense
+  #namespace: expense
 spec:
   type: LoadBalancer
   selector:
