@@ -21,8 +21,30 @@ We have two options:
 * c. Attach IAM Policy to Node IAM Role  
   - Attach the `AmazonEBSCSIDriverPolicy` to the IAM role associated with your node group
 
-* d. Create a PersistentVolume (PV)
+# provisioning
 
-* e. Create a PersistentVolumeClaim (PVC)
+* a. Create a PersistentVolume (PV)
 
-* f. Attach the PVC to a Pod
+* b. Create a PersistentVolumeClaim (PVC)
+
+* c. Attach the PVC to a Pod
+
+# Prerequisites for Dynamic Provisioning
+
+* a. Install the AWS EBS CSI Driver  
+  - Apply the CSI driver using:  
+    ```bash
+    kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.43"
+    ```
+
+* b. Attach IAM Policy to Node IAM Role  
+  - Attach the `AmazonEBSCSIDriverPolicy` to the IAM role associated with your node group
+
+* c. Create a StorageClass  
+  - Define a `StorageClass` specifying the provisioner and volume type
+
+* d. Create a PersistentVolumeClaim (PVC)  
+  - Reference the `StorageClass` in the PVC; Kubernetes will dynamically provision the volume
+
+* e. Attach the PVC to a Pod  
+  - Use the PVC in a Pod to mount the dynamically created volume
