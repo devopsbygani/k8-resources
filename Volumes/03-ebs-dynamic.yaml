@@ -14,10 +14,10 @@ spec:
       storage: 4Gi
 ---
 apiVersion: v1
-kind: pod
+kind: Pod
 metadata:
   name: ebs-dynamic
-  namespace: expense
+ # namespace: expense
   labels:
     product: testing
 spec:
@@ -33,10 +33,10 @@ spec:
       claimName: ebs-dynamic
 ---
 apiVersion: v1
-kind: service
+kind: Service
 metadata:
   name: ebs-dynamic
-  namespace: expense
+#  namespace: expense
 spec:
   type: LoadBalancer
   selector:
