@@ -20,7 +20,7 @@ spec:
     volumeHandle: vol-0dbd2948d9ec9fafd
 ---
 apiVersion: v1
-kind: persistentVolumeClaim
+kind: PersistentVolumeClaim
 metadata:
   name: ebs-static-claim
 spec:
@@ -33,7 +33,7 @@ spec:
       storage: 5Gi
 ---
 apiVersion: v1
-kind: pod
+kind: Pod
 metadata:
   name: ebs-static
   #namespace: expense
