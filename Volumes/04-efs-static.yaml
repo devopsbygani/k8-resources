@@ -22,11 +22,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
-  storageClassName: " " 
+  storageClassName: "" 
   persistentVolumeReclaimPolicy: Retain
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: [FileSystemId] 
+    volumeHandle: fs-0729e84b980af153c
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -35,7 +35,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: " "
+  storageClassName: ""
   resources:
     requests:
       storage: 1Gi
