@@ -65,7 +65,7 @@ metadata:
   name: efs-static-svc
 spec:
   type: LoadBalancer
-  selectors:
+  selector:
     tier: app
     project: expense
   ports:
