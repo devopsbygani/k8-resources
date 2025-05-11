@@ -1,62 +1,78 @@
+# 1. creating a Efs volume.  [*admin task] 
+# 2. Installing efs-csi drivers. [*admin task] 
+# 3. attach the efscsi policy  [*admin task] 
+# 4. allow connection from EFS SG on port 2049 for SG of worker nodes. to receive traffic from nodes
+# 4. creating pv (persistentVolume) [*admin task] **cluster level resource.
+# 5. creating pvc (persistentVolumeClaim) [application level task :devops] 
+# 6. creating a pod and attching to the PVC. [application level task :devops] *namespace level resource
+# 7. creating a service load balancer under a nodeport : 30007 for testing. [application level task :devops]
+# 8. how to test ? make sure the voulme retintion policy is retain.
+#     delete the existing setup and then reestabish .it has to refeletct the same content of data.
+# step to install drivers.
+# kubectl kustomize \
+#     "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-2.1" > public-ecr-driver.yaml
+# kubectl apply -f public-ecr-driver.yaml
+
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: expense-efs
+  name: efs-static
 spec:
   capacity:
-    storage: 5Gi
+    storage: 1Gi
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnce
-  storageClassName: ""
+    - ReadWriteMany
+  storageClassName: "" 
   persistentVolumeReclaimPolicy: Retain
   csi:
     driver: efs.csi.aws.com
     volumeHandle: fs-0729e84b980af153c
+    
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: expense-efs
+  name: efs-static-claim
 spec:
-  volumeName: expense-efs
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: ""
   resources:
     requests:
-      storage: 5Gi
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: efs-static
-  labels:
-    purpose: efs-static
+  name: efs-static-pod
+  labels: 
+    tier: app
+    project: expense
 spec:
   containers:
   - name: nginx
     image: nginx
-    volumeMounts: # docker run -v hostpath:contaierpath
-    - name: expense-efs
+    volumeMounts:
+    - name: efs-static-claim
       mountPath: /usr/share/nginx/html
   volumes:
-  - name: expense-efs
+  - name: efs-static-claim
     persistentVolumeClaim:
-      claimName: expense-efs
+      claimName: efs-static-claim
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: nginx
+  name: efs-static-svc
 spec:
   type: LoadBalancer
   selector:
-    purpose: efs-static
+    tier: app
+    project: expense
   ports:
-  - name: nginx-svc-port
+  - name: efs-static-svc
     protocol: TCP
     port: 80 # service port
-    targetPort: 80 # container port
-    nodePort: 30007
-  
+    targetPort: 80  # container port
+    nodePort:  30007 
