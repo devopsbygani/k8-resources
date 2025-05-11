@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-cs-claim
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: efs-sc
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: efs-dynamic-pod
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+        - name: efs-dynamic
+          mountPath: /data
+  volumes:
+    - name: efs-dynamic
+      persistentVolumeClaim:
+        claimName: efs-cs-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: efs-dynamic-svc
+spec:
+  type: LoadBalancer
+  selectors:
+    tier: app
+    project: expense
+  ports:
+  - name: efs-dynamic-svc
+    Protocol: TCP
+    port: 80 # service port
+    targetport: 80  # container port
+    nodePort:  30007 

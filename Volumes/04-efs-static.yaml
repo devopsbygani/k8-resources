@@ -4,7 +4,7 @@
 # 4. creating pv (persistentVolume) [*admin task] **cluster level resource.
 # 5. creating pvc (persistentVolumeClaim) [application level task :devops] 
 # 6. creating a pod and attching to the PVC. [application level task :devops] *namespace level resource
-# 7. creating a service load balcncer under a nodeport : 30007 for testing. [application level task :devops]
+# 7. creating a service load balancer under a nodeport : 30007 for testing. [application level task :devops]
 # 8. how to test ? make sure the voulme retintion policy is retain.
 #     delete the existing setup and then reestabish .it has to refeletct the same content of data.
 # step to install drivers.
@@ -28,5 +28,49 @@ spec:
     driver: efs.csi.aws.com
     volumeHandle: [FileSystemId] 
 ---
-
-
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-static-claim
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: " "
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: efs-static-pod
+  labels: 
+    tier: app
+    project: expense
+    spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: efs-static
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: efs-static
+    persistentVolumeClaim:
+      claimName: efs-static-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: efs-static-svc
+spec:
+  type: LoadBalancer
+  selectors:
+    tier: app
+    project: expense
+  ports:
+  - name: efs-static-svc
+    Protocol: TCP
+    port: 80 # service port
+    targetport: 80  # container port
+    nodePort:  30007 
