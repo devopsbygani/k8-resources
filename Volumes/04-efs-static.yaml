@@ -52,10 +52,10 @@ spec:
   - name: nginx
     image: nginx
     volumeMounts:
-    - name: efs-static
+    - name: efs-static-claim
       mountPath: /usr/share/nginx/html
   volumes:
-  - name: efs-static
+  - name: efs-static-claim
     persistentVolumeClaim:
       claimName: efs-static-claim
 ---
