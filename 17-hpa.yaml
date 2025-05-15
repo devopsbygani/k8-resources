@@ -1,0 +1,61 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: hpa
+  labels:
+    project: demo
+    tier: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: demo
+      tier: app
+  template:
+    metadata:
+      labels:
+        project: demo
+        tier: app
+    spec:
+      conatainers:
+      - name: nginx
+        image: nginx
+        resource:
+          requests:
+            cpu: 100m
+            memory: 120Mi
+          limits:
+            cpu: 400m
+            memory: 200Mi
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: hpa-svc
+spec:
+  type: LoadBalancer
+  selector:
+    project: demo
+    tier: app
+  ports:
+    name: hpa-svc-port
+    protocol: TCP
+    port: 80 # service port
+    targetPort: 80 # container port
+    nodePort: 30007
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hpa
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
+
+# (or) simple command  $kubectl autoscale deployment <depolyement_name> --cpu-percent=50 --min=1 --max=10
+#kubectl autoscale deployment nginx --cpu-percent=50 --min=1 --max=10

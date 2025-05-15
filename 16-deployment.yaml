@@ -13,12 +13,12 @@ spec:
       envirnoment: dev
       module: demo
   template:
-  metadata:
-    labels:
-      project: expense
-      envirnoment: dev
-      module: demo
-      app: nginx
+    metadata:
+      labels:
+        project: expense
+        envirnoment: dev
+        module: demo
+        app: nginx
     spec:
       containers:
       - name: nginx
