@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: nginx
 spec:
+  type: LoadBalancer
   selector: 
     project: expense
     envirnoment: dev
