@@ -55,7 +55,7 @@ spec:
     name: hpa
   minReplicas: 1
   maxReplicas: 10
-  targetCPUUtilizationPercentage: 50
-
+  targetCPUUtilizationPercentage: 15
+#referencew: https://cloud.google.com/kubernetes-engine/docs/how-to/horizontal-pod-autoscaling#kubectl-autoscale
 # (or) simple command  $kubectl autoscale deployment <depolyement_name> --cpu-percent=50 --min=1 --max=10
 #kubectl autoscale deployment nginx --cpu-percent=50 --min=1 --max=10
