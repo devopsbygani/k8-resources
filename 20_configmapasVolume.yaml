@@ -1,0 +1,4 @@
+# in our frontend application we always change nginx.conf if any new configuration is steup, to avoid rebuild of new image again. instead frequently chnage values can be passed from here as a configmap if any sensitive info can pass through secreets.
+
+apiVersion: v1
+kind: ConfigMap
