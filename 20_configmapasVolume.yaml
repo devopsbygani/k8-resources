@@ -131,7 +131,8 @@ spec:
             readOnly: true
       volumes:
       - name: nginx-conf
-        configMap:
+        
+        :
           name: frontend
           items:
             - key: nginx.conf
@@ -156,6 +157,4 @@ spec:
     port: 80 # service port
     targetPort: 80 # conatainer port
 ---
-
-
 

@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: datacenter
+spec:
+  schedule: "*/4 * * * *"
+  jobTemplate:
+    spec: 
+      template:
+        spec: 
+          containers:
+          - name: cron-datacenter
+            image: httpd:latest
+            command: ["/bin/bash","-c","echo 'Welcome to xfusioncorp!'"]    
+          restartPolicy: OnFailure
